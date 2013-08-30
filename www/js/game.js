@@ -10,4 +10,12 @@
   Game.prototype.play = function() {
     
   }
+  
+  Game.prototype.isOver = function() {
+    
+  }
+  
+  Game.prototype.isWon = function() {
+    
+  }
 })(this);

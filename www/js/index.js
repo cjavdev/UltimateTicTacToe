@@ -16,7 +16,6 @@ var app = {
     // function, we must explicity call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         var game = new TTT.Game();
-        debugger;
         game.play();
     },
 };

@@ -3,8 +3,8 @@
   
   var Game = TTT.Game = function() {
     this.name = "testing game";
-    this.player1 = new Player("X");
-    this.player2 = new Player("O");
+    this.player1 = new TTT.Player("X");
+    this.player2 = new TTT.Player("O");
   }
   
   Game.prototype.play = function() {
