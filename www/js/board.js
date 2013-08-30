@@ -49,4 +49,8 @@
       });
       return over;
   }
+  
+  Board.prototype.reset = function () {
+      this.board = [[null, null, null], [null, null, null], [null, null, null]];
+  }
 })(this);

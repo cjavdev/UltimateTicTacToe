@@ -13,14 +13,29 @@
   Game.tiles = ['tl','t','tr','ml','m','mr','bl','b','br'];
   
   Game.prototype.play = function() {
+    var game = this;
+    console.log(game);
     if(this.board.isWon()) {
       alert("Winner!");
+      setTimeout(function() {
+          game.resetBoard();
+          
+          game.play();
+      }, 2000);
     } else if(this.board.isOver()) {
       alert("Draw!");
     } else {
       this.alternate_player();
       this.bindListeners(this.current_player);
     }
+  }
+  
+  Game.prototype.resetBoard = function() {
+      Game.tiles.forEach(function (tile) {
+          document.getElementById(tile).classList.remove("o");
+          document.getElementById(tile).classList.remove("x");
+      });
+      this.board.reset();
   }
   
   Game.prototype.alternate_player = function() {
@@ -42,7 +57,7 @@
       };
       document.getElementById(tile).addEventListener('touchstart', takeTurn, false);
       //uncomment to test in browser
-      //document.getElementById(tile).addEventListener('click', tt, false);
+      document.getElementById(tile).addEventListener('click', takeTurn, false);
     });
   }
   
