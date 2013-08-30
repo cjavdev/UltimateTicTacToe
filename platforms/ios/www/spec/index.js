@@ -1,50 +1,35 @@
-
-describe('app', function() {
-    describe('initialize', function() {
-        it('should bind deviceready', function() {
-            runs(function() {
-                spyOn(app, 'onDeviceReady');
-                app.initialize();
-                helper.trigger(window.document, 'deviceready');
-            });
-
-            waitsFor(function() {
-                return (app.onDeviceReady.calls.length > 0);
-            }, 'onDeviceReady should be called once', 500);
-
-            runs(function() {
-                expect(app.onDeviceReady).toHaveBeenCalled();
-            });
+describe('ttt', function () {
+    describe('board', function () {
+        it('should check for validMoves', function () {
+            var board = new TTT.Board();
+            expect(board.validMove(3, 2)).toEqual(false);
+            expect(board.validMove(2, 2)).toEqual(true);
+            board.move(2, 2, "x");
+            expect(board.validMove(2, 2)).toEqual(false);
         });
-    });
-
-    describe('onDeviceReady', function() {
-        it('should report that it fired', function() {
-            spyOn(app, 'receivedEvent');
-            app.onDeviceReady();
-            expect(app.receivedEvent).toHaveBeenCalledWith('deviceready');
+        
+        it('should check for vert win condition', function () {
+            var board = new TTT.Board();
+            board.move(0, 0, "x");
+            board.move(1, 0, "x");
+            board.move(2, 0, "x");
+            expect(board.isWon()).toEqual(true);
         });
-    });
-
-    describe('receivedEvent', function() {
-        beforeEach(function() {
-            var el = document.getElementById('stage');
-            el.innerHTML = ['<div id="deviceready">',
-                            '    <p class="event listening">Listening</p>',
-                            '    <p class="event received">Received</p>',
-                            '</div>'].join('\n');
+        
+        it('should check for horiz win condition', function () {
+            var board = new TTT.Board();
+            board.move(1, 0, "x");
+            board.move(1, 1, "x");
+            board.move(1, 2, "x");
+            expect(board.isWon()).toEqual(true);
         });
-
-        it('should hide the listening element', function() {
-            app.receivedEvent('deviceready');
-            var displayStyle = helper.getComputedStyle('#deviceready .listening', 'display');
-            expect(displayStyle).toEqual('none');
-        });
-
-        it('should show the received element', function() {
-            app.receivedEvent('deviceready');
-            var displayStyle = helper.getComputedStyle('#deviceready .received', 'display');
-            expect(displayStyle).toEqual('block');
+        
+        it('should check for not won condition', function () {
+            var board = new TTT.Board();
+            board.move(0, 0, "x");
+            board.move(1, 0, "x");
+            
+            expect(board.isWon()).toEqual(false);
         });
     });
 });

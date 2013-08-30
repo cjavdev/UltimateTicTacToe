@@ -4,8 +4,4 @@
   var Player = TTT.Player = function(symbol) {
     this.symbol = symbol;
   }
-  
-  Player.prototype.takeTurn = function (board, callback) {
-    
-  }
 })(this);

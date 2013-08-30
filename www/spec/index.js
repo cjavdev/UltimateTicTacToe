@@ -31,5 +31,26 @@ describe('ttt', function () {
             
             expect(board.isWon()).toEqual(false);
         });
+        
+        it('should make a tile move', function () {
+            var board = new TTT.Board();
+            board.tileMove('tl', "x");
+            expect(board.board[0][0]).toEqual("x");
+        });
+        
+        it("should check for over condition", function () {
+           var board = new TTT.Board();
+           board.move(0, 0, "a"); 
+           board.move(0, 1, "b"); 
+           board.move(0, 2, "c"); 
+           board.move(1, 0, "d"); 
+           board.move(1, 1, "e"); 
+           board.move(1, 2, "f"); 
+           board.move(2, 0, "g"); 
+           board.move(2, 1, "o"); 
+           expect(board.isOver()).toEqual(false);
+           board.move(2, 2, "o"); 
+           expect(board.isOver()).toEqual(true);
+        });
     });
 });
