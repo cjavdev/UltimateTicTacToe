@@ -9,31 +9,10 @@
     this.current_player = this.player1;
   }
   
+  // DOM ids of the .tile elements
   Game.tiles = ['tl','t','tr','ml','m','mr','bl','b','br'];
   
-  Game.prototype.bindListeners = function (player) {
-    var game = this;
-    Game.tiles.forEach(function(tile) {
-      var tt = function () {
-        player.takeTurn(tile, game);        
-        game.removeListeners();
-        game.play();
-      };
-      document.getElementById(tile).addEventListener('touchstart', tt, false);
-      //document.getElementById(tile).addEventListener('click', tt, false);
-    });
-  }
-  
-  Game.prototype.removeListeners = function() {
-    Game.tiles.forEach(function(tile) {
-      var old_element = document.getElementById(tile);
-      var new_element = old_element.cloneNode(true);
-      old_element.parentNode.replaceChild(new_element, old_element);
-    });
-  }
-  
   Game.prototype.play = function() {
-    console.log("playing");
     if(this.board.isWon()) {
       alert("Winner!");
     } else if(this.board.isOver()) {
@@ -45,11 +24,33 @@
   }
   
   Game.prototype.alternate_player = function() {
-    console.log(this.current_player);
     if(this.current_player == this.player2) {
       this.current_player = this.player1;
     } else {
       this.current_player = this.player2;
     }
+  }
+  
+  //bind and remove listeners manually to keep pure js
+  Game.prototype.bindListeners = function (player) {
+    var game = this;
+    Game.tiles.forEach(function(tile) {
+      var takeTurn = function () {
+        player.takeTurn(tile, game);        
+        game.removeListeners();
+        game.play();
+      };
+      document.getElementById(tile).addEventListener('touchstart', takeTurn, false);
+      //uncomment to test in browser
+      //document.getElementById(tile).addEventListener('click', tt, false);
+    });
+  }
+  
+  Game.prototype.removeListeners = function() {
+    Game.tiles.forEach(function(tile) {
+      var old_element = document.getElementById(tile);
+      var new_element = old_element.cloneNode(true);
+      old_element.parentNode.replaceChild(new_element, old_element);
+    });
   }
 })(this);
