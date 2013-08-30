@@ -7,6 +7,8 @@
   }
   
   Player.prototype.takeTurn = function (tile, game) {
+    //this is how we add the .o or .x class to the tile
+    // in pure js.
     document.getElementById(tile).classList.add(this.symbol);
     this.board.tileMove(tile, this.symbol);
   }

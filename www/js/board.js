@@ -16,16 +16,12 @@
   }
   
   Board.prototype.tileMove = function (tile, symbol) {
+      // mappings of tile id's to board locations.
       var mapping = { 
-        'tl': [0, 0],
-        't' : [0, 1],
-        'tr': [0, 2],
-        'ml': [1, 0],
-        'm' : [1, 1],
-        'mr': [1, 2],
-        'bl': [2, 0],
-        'b' : [2, 1],
-        'br': [2, 2] }
+        'tl': [0, 0], 't' : [0, 1], 'tr': [0, 2],
+        'ml': [1, 0], 'm' : [1, 1], 'mr': [1, 2],
+        'bl': [2, 0], 'b' : [2, 1], 'br': [2, 2] }
+    
       this.move(mapping[tile][0], mapping[tile][1], symbol);
   }
   
