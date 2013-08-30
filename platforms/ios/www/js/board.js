@@ -15,6 +15,20 @@
       }
   }
   
+  Board.prototype.tileMove = function (tile, symbol) {
+      var mapping = { 
+        'tl': [0, 0],
+        't' : [0, 1],
+        'tr': [0, 2],
+        'ml': [1, 0],
+        'm' : [1, 1],
+        'mr': [1, 2],
+        'bl': [2, 0],
+        'b' : [2, 1],
+        'br': [2, 2] }
+      this.move(mapping[tile][0], mapping[tile][1], symbol);
+  }
+  
   Board.prototype.isWon = function () {
       var b = this.board;
       row1 = b[0][0] == b[0][1] && b[0][1] == b[0][2] && b[0][0] != null;
@@ -26,5 +40,17 @@
       h1   = b[0][0] == b[1][1] && b[1][1] == b[2][2] && b[0][0] != null;
       h2   = b[0][2] == b[1][1] && b[1][1] == b[2][0] && b[0][2] != null;
       return row1 || row2 || row3 || col1 || col2 || col3 || h1 || h2;
+  }
+  
+  Board.prototype.isOver = function() {
+      if(this.isWon()) { return true; }
+      var tiles = [].concat.apply([], this.board);
+      var over = true;
+      tiles.forEach(function (tile) {
+          if(tile == null) {
+              over = false;
+          }
+      });
+      return over;
   }
 })(this);

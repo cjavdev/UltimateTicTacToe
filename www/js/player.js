@@ -6,7 +6,8 @@
     this.board = board;
   }
   
-  Player.prototype.takeTurn = function (tile) {
+  Player.prototype.takeTurn = function (tile, game) {
+    document.getElementById(tile).classList.add(this.symbol);
     this.board.tileMove(tile, this.symbol);
   }
 })(this);

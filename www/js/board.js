@@ -18,7 +18,7 @@
   Board.prototype.tileMove = function (tile, symbol) {
       var mapping = { 
         'tl': [0, 0],
-        'l' : [0, 1],
+        't' : [0, 1],
         'tr': [0, 2],
         'ml': [1, 0],
         'm' : [1, 1],
